@@ -1,34 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import DynamicFilesTable from "../common/DynamicFilesTable";
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useFetchFormatedFiles } from "../../hooks/useFetchFormatedFiles";
+import { CustomSpinner } from "../common/Spinner";
+import DropdownComponent from "../common/DropdownComponent";
 
 const FileDataComponent = () => {
-  const headers = ["text","number","hex"];
+	const headers = ["name", "text", "number", "hex"];
 
-  const { data, isLoading, error } = useFetchFormatedFiles();
-  const [processedData, setProcessedData] = useState([]);
+	const { data, isLoading, error } = useFetchFormatedFiles();
 
-//   const handleFetchData = async () => {
-//     await fetchData();
-//   };
+	useEffect(() => {}, [data, isLoading]);
 
-  useEffect(() => {
-    console.log(data)
-  }, [data]);
+	const handleUpdate = (selectedValue) => {
+		console.log("Nueva selección:", selectedValue);
 
-  return (
-    <div className="p-4 rounded-xl shadow-md max-w-xs mx-auto text-center mb-8">
-      {/* <Button onClick={handleFetchData} disabled={isLoading}>
-        {isLoading ? "Loading..." : "Fetch Data"}
-      </Button> */}
-      {/* <h2 className="text-xl font-bold">Toolbox fileformat requester</h2>
-      <DynamicFilesTable headers={headers} data={processedData}/>
-      {error && <p className="text-red-500">Error: {error}</p>} */}
-      a
-    </div>
-  );
+		
+	};
+
+	return (
+		<div className="p-4 rounded-xl shadow-md max-w-xs mx-auto text-center mb-8">
+			<h3 className="text-xl font-bold">
+				Todos los archivos formateados
+			</h3>
+			<div
+				style={{
+					height: "calc(100vh - 500px)", // Adjust to the desired fixed height
+					overflowY: "auto",
+				}}
+			>
+				<DropdownComponent onSelectionChange={handleUpdate}/>
+				{isLoading ? (
+					<CustomSpinner />
+				) : (data || []).length > 0 ? (
+					data.map((f) => (
+						<DynamicFilesTable
+							title={f.file}
+							key={f.file}
+							headers={headers}
+							data={f.lines}
+							fixedValues={{ name: f.file }}
+						/>
+					))
+				) : (
+					<p>No hay datos disponibles.</p>
+				)}
+				{error && <p className="text-red-500">Error: {error}</p>}
+			</div>
+		</div>
+	);
 };
 
 export default FileDataComponent;
