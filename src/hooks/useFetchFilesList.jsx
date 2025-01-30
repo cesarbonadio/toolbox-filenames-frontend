@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { fetchFilesList } from "../services/filesService";
+import { useState, useEffect } from 'react'
+import { fetchFilesList } from '../services/filesService'
 
 /**
  * Custom hook to fetch the list of files from the server.
@@ -11,27 +11,26 @@ import { fetchFilesList } from "../services/filesService";
  * @returns {string|null} return.error - The error message if the request fails, or null if there's no error.
  */
 export const useFetchFilesList = () => {
-	const [data, setData] = useState(null);
-	const [isLoading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await fetchFilesList();
-				if (!response.status === 200)
-					throw new Error("Error al obtener los datos");
-				const result = await response;
-				setData(result);
-			} catch (err) {
-				setError(err.message);
-			} finally {
-				setLoading(false);
-			}
-		};
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetchFilesList()
+        if (!response.status === 200) { throw new Error('Error al obtener los datos') }
+        const result = await response
+        setData(result)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
 
-		fetchData();
-	}, []);
+    fetchData()
+  }, [])
 
-	return { data, isLoading, error };
-};
+  return { data, isLoading, error }
+}

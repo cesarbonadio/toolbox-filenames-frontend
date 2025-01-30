@@ -1,4 +1,4 @@
-import makeRequest from "../utils/axiosRequester";
+import makeRequest from '../utils/axiosRequester'
 
 /**
  * Fetches the list of all available files from the server.
@@ -9,16 +9,16 @@ import makeRequest from "../utils/axiosRequester";
  * @throws {Error} Logs an error message if the request fails.
  */
 export const fetchFilesList = async () => {
-	try {
-		const response = await makeRequest({
-			method: "GET",
-			url: "/files/list",
-		});
-		return response;
-	} catch (error) {
-		console.error(`Error get all files services: ${error}`);
-	}
-};
+  try {
+    const response = await makeRequest({
+      method: 'GET',
+      url: '/files/list'
+    })
+    return response
+  } catch (error) {
+    console.error(`Error get all files services: ${error}`)
+  }
+}
 
 /**
  * Fetches formatted file data from the server.
@@ -30,14 +30,14 @@ export const fetchFilesList = async () => {
  * @throws {Error} Logs an error message if the request fails.
  */
 export const fetchFormatedFiles = async (fileName = null) => {
-	try {
-		const response = await makeRequest({
-			method: "GET",
-			url: "/files/data",
-			params: fileName ? { fileName } : {},
-		});
-		return response;
-	} catch (error) {
-		console.error(`Error to get formatted data files: ${error}`);
-	}
-};
+  try {
+    const response = await makeRequest({
+      method: 'GET',
+      url: '/files/data',
+      params: fileName ? { fileName } : {}
+    })
+    return response
+  } catch (error) {
+    console.error(`Error to get formatted data files: ${error}`)
+  }
+}

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { fetchFormatedFiles } from "../services/filesService";
+import { useState, useEffect } from 'react'
+import { fetchFormatedFiles } from '../services/filesService'
 
 /**
  * Custom hook to fetch formatted file data.
@@ -12,38 +12,38 @@ import { fetchFormatedFiles } from "../services/filesService";
  * @returns {boolean} return.searchFile - Indicates whether a specific file is being searched.
  */
 export const useFetchFormatedFiles = (search) => {
-	const [data, setData] = useState([]);
-	const [isLoading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
-	const [searchFile, setSearchFile] = useState(false);
+  const [data, setData] = useState([])
+  const [isLoading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [searchFile, setSearchFile] = useState(false)
 
-	useEffect(() => {
-		const fetchFiles = async () => {
-			setLoading(true);
-			setError(null);
-			try {
-				const data = await fetchFormatedFiles(search);
-				if (data) {
-					if (search) {
-						setSearchFile(true);
-					} else {
-						setSearchFile(false);
-					}
-					setData(data);
-				} else {
-					setError("No se pudo obtener respuesta de o los archivos");
-					setData([]);
-				}
-			} catch (err) {
-				setError(`Error al obtener respuesta: ${err.message}`);
-				setData([]);
-			} finally {
-				setLoading(false);
-			}
-		};
+  useEffect(() => {
+    const fetchFiles = async () => {
+      setLoading(true)
+      setError(null)
+      try {
+        const data = await fetchFormatedFiles(search)
+        if (data) {
+          if (search) {
+            setSearchFile(true)
+          } else {
+            setSearchFile(false)
+          }
+          setData(data)
+        } else {
+          setError('No se pudo obtener respuesta de o los archivos')
+          setData([])
+        }
+      } catch (err) {
+        setError(`Error al obtener respuesta: ${err.message}`)
+        setData([])
+      } finally {
+        setLoading(false)
+      }
+    }
 
-		fetchFiles();
-	}, [search]);
+    fetchFiles()
+  }, [search])
 
-	return { data, isLoading, error, searchFile };
-};
+  return { data, isLoading, error, searchFile }
+}

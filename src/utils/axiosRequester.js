@@ -1,4 +1,4 @@
-import axiosInstance from "../config/axios";
+import axiosInstance from '../config/axios'
 
 /**
  * A generic utility function for making HTTP requests with Axios.
@@ -18,25 +18,25 @@ import axiosInstance from "../config/axios";
  *   .catch(error => console.error(error))
  */
 const makeRequest = async (
-	{ method, url, data = {}, params = {}, headers = {} },
-	returnAllResult = false,
+  { method, url, data = {}, params = {}, headers = {} },
+  returnAllResult = false
 ) => {
-	try {
-		const response = await axiosInstance({
-			method,
-			url,
-			data,
-			params,
-			headers: {
-				...axiosInstance.defaults.headers,
-				...headers,
-			},
-		});
-		return returnAllResult ? response : response.data;
-	} catch (error) {
-		console.error("API Request Error:", error.message);
-		throw error.response?.data || error.message;
-	}
-};
+  try {
+    const response = await axiosInstance({
+      method,
+      url,
+      data,
+      params,
+      headers: {
+        ...axiosInstance.defaults.headers,
+        ...headers
+      }
+    })
+    return returnAllResult ? response : response.data
+  } catch (error) {
+    console.error('API Request Error:', error.message)
+    throw error.response?.data || error.message
+  }
+}
 
-export default makeRequest;
+export default makeRequest
