@@ -14,7 +14,7 @@ const Files = () => {
 			<Button
 				as={Link}
 				to="/"
-				variant="danger"
+				variant="outline-danger"
 				className="position-absolute start-0 m-3"
 			>
 				Regresar

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DynamicFilesTable from "../common/DynamicFilesTable";
 import { useFetchFormatedFiles } from "../../hooks/useFetchFormatedFiles";
 import { CustomSpinner } from "../common/Spinner";
@@ -7,28 +7,28 @@ import DropdownComponent from "../common/DropdownComponent";
 const FileDataComponent = () => {
 	const headers = ["name", "text", "number", "hex"];
 
-	const { data, isLoading, error } = useFetchFormatedFiles();
+	const [refresh, setRefresh] = useState(0);
+	const { data, isLoading, error, searchFile } =
+		useFetchFormatedFiles(refresh);
 
 	useEffect(() => {}, [data, isLoading]);
 
 	const handleUpdate = (selectedValue) => {
-		console.log("Nueva selección:", selectedValue);
-
-		
+		setRefresh(selectedValue);
 	};
 
 	return (
 		<div className="p-4 rounded-xl shadow-md max-w-xs mx-auto text-center mb-8">
-			<h3 className="text-xl font-bold">
+			<h3 className="text-xl font-bold mb-4">
 				Todos los archivos formateados
 			</h3>
+			<DropdownComponent onSelectionChange={handleUpdate} />
 			<div
 				style={{
-					height: "calc(100vh - 500px)", // Adjust to the desired fixed height
+					height: "calc(100vh - 500px)",
 					overflowY: "auto",
 				}}
 			>
-				<DropdownComponent onSelectionChange={handleUpdate}/>
 				{isLoading ? (
 					<CustomSpinner />
 				) : (data || []).length > 0 ? (

@@ -7,10 +7,9 @@ function HomePage() {
 	return (
 		<div className="home-container" data-bs-theme="dark">
 			<img
-				className="mb-5"
+				className="mb-4"
 				src="https://files.toolboxtve.com/wp-content/uploads/2022/03/09085119/logo-stycky2022.png"
-				alt="Logo de Toolbox"
-				width="250px"
+				width="300px"
 			/>
 			<h1>Toolbox - file processing frontend</h1>
 

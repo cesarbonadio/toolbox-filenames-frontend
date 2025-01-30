@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import DynamicFilesTable from "../common/DynamicFilesTable";
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useFetchFilesList } from "../../hooks/useFetchFilesList";
 
 const FileListComponent = () => {
@@ -24,7 +22,7 @@ const FileListComponent = () => {
 			<h4 className="text-xl font-bold">Lista de archivos</h4>
 			<div
 				style={{
-					height: "calc(100vh - 500px)", // Adjust to the desired fixed height
+					height: "calc(100vh - 500px)",
 					overflowY: "auto",
 				}}
 			>
